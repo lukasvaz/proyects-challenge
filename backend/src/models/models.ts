@@ -1,4 +1,5 @@
-import { DataTypes, Sequelize } from "sequelize";
+import { DataTypes, Sequelize, Model, ModelStatic, Optional } from "sequelize";
+
 
 export const sequelize = new Sequelize({
   dialect: "sqlite",
@@ -6,7 +7,9 @@ export const sequelize = new Sequelize({
   logging: false,
 });
 
-export const Project = sequelize.define(
+
+type ProjectCreationAttributes = Optional<ProjectAttributes, "id">;
+export const Project: ModelStatic<Model<ProjectAttributes, ProjectCreationAttributes>> = sequelize.define(
   "Project",
   {
     id: {
@@ -37,7 +40,8 @@ export const Project = sequelize.define(
   }
 );
 
-export const Worker = sequelize.define(
+type WorkerCreationAttributes = Optional<WorkerAttributes, "id" | "projectId">;
+export const Worker: ModelStatic<Model<WorkerAttributes, WorkerCreationAttributes>> = sequelize.define(
   "Worker",
   {
     id: {
