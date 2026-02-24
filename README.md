@@ -52,7 +52,6 @@ Requisitos locales:
 
 ### 🔹 Decisiones técnicas
   - Se separó  frontend y backend  como proyectos independientes por las diferentes dependencias de cada uno.
-
   - Se ocuparon componentes de material UI y un ORM  como Sequelize para un prototipado más rápido
 
 - Prioridades de implementación:
@@ -64,11 +63,11 @@ Requisitos locales:
      - desarrollo de UI
     
 - Qué se dejó fuera:
-   - No se hace validación de datos  en front y back pq para efectos de una prueba técnica queda fuera de alcance .
+   - No se hace validación de datos  en front y back, para efectos de una prueba técnica y para cuidar el tiempo de desarrollo se decide que queda fuera de alcance .
 
    - El proyecto se testeo solo en forma de desarrollo (por ejemplo no intenté hacer el build  del frontend), solo se probó que las funcionalidades requeridas funcionaran correctamente en modo desarrollo y se subió.
 
-   -Una buena idea que tenía considerada es  dockerizar el proyecto para facilitar la portabilidad, hacerlo  me dejaba ya fuera de los limites de  tiempo. Además dejé dentro del codigo variables  que dependen  del ambiente (p. ej. `BACKEND_URL`,`PORT` ) como fijas, si bien esto sirve se pueden inyectar desde  varieables de entorno.
+   - Una buena idea que tenía considerada es  dockerizar el proyecto para facilitar la portabilidad, hacerlo  me dejaba ya fuera de los limites de  tiempo. Además dejé dentro del codigo variables  que dependen  del ambiente (p. ej. `BACKEND_URL`,`PORT` ) como fijas, si bien esto sirve se pueden inyectar desde  varieables de entorno.
 
 ### 🔹 Mejoras futuras (si hubiera más tiempo)
     - La implementacion de los aspectos que se dejaron fuera mencionados:
