@@ -1,4 +1,5 @@
 import express from "express";
+import { initDb } from "./src/models/models";
 
 const app = express();
 app.use(express.json());
@@ -8,7 +9,17 @@ app.get("/hello", (_req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Backend listening on http://localhost:${PORT}`);
-});
+
+async function start() {
+  try {
+    await initDb();
+    app.listen(PORT, () => {
+      console.log(`Backend listening on http://localhost:${PORT}`);
+    });
+  } catch (err) {
+    console.error("Failed to initialize database:", err);
+    process.exit(1);
+  }
+}
+
+start();
