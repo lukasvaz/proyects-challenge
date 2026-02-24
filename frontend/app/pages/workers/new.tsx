@@ -8,15 +8,14 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Header from "../../components/Header";
+import { BACKEND_URL } from "~/constants";
 
 
 export default function NewWorker() {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [seniority, setSeniority] = useState("junior");
-  const BACKEND_URL = "http://localhost:3000";
-
-
+  
   const handleSubmit = async (e: React.FormEvent) => {0
     e.preventDefault();
     try {

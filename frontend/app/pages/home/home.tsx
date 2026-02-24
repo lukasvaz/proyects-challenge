@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Header from "../../components/Header";
 import Button from "@mui/material/Button";
 import Modal from "./Modal";
+import { BACKEND_URL } from "~/constants";
 
 type Worker = {
   id: number;
@@ -17,7 +18,6 @@ type Worker = {
   role: string;
   seniority: string;
 }; 
-
 type Project = {
   id: number;
   name: string;
@@ -32,8 +32,7 @@ export default function Home() {
   const [openMap, setOpenMap] = useState<Record<number, boolean>>({});
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProject, setModalProject] = useState<Project | null>(null);
-  const BACKEND_URL = "http://localhost:3000";
-
+  
   const fetchProjects = () => {
     fetch(`${BACKEND_URL}/api/projects`)
       .then((res) => res.json())

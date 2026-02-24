@@ -7,7 +7,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
-
+import { BACKEND_URL } from "~/constants";
 type Worker = { id: number; name: string; role: string; seniority: string };
 type Project = { id: number; name: string; client?: string; workers?: Worker[] } | null;
 
@@ -15,7 +15,7 @@ export default function Modal({
   open,
   project,
   onClose,
-  backendUrl = "http://localhost:3000",
+  backendUrl = BACKEND_URL,
   onAssigned,
 }: {
   open: boolean;
