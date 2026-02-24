@@ -70,22 +70,21 @@ Requisitos locales:
    - Una buena idea que tenía considerada es  dockerizar el proyecto para facilitar la portabilidad, hacerlo  me dejaba ya fuera de los limites de  tiempo. Además dejé dentro del codigo variables  que dependen  del ambiente (p. ej. `BACKEND_URL`,`PORT` ) como fijas, si bien esto sirve se pueden inyectar desde  varieables de entorno.
 
 ### 🔹 Mejoras futuras (si hubiera más tiempo)
-    - La implementacion de los aspectos que se dejaron fuera mencionados:
-        - La validación de datos se puede hacer con Zod y se puede  mejorar la UI  para mostrar validaciones del frontend
-        - La portabilidad  del repo  puede asegurarse con docker, sería  hacer  un docker-compose file y en este caso asegurarse de usar variables de ambiente
-
+- La implementacion de los aspectos que se dejaron fuera mencionados:
+    - La validación de datos se puede hacer con Zod y se puede  mejorar la UI  para mostrar validaciones del frontend
+    - La portabilidad  del repo  puede asegurarse con docker, sería  hacer  un docker-compose file y en este caso asegurarse de usar variables de ambient
 ### Explicación conceptual 
-    Responde brevemente:
-    1. ¿Cómo escalarías este sistema si tuviera 10.000 proyectos?
-    Una motor de  bases de datos relacional  debería ser suficiente para esa cantidad de datos. Lo que se tendría que hacer es  migrar el sistema a Postgres (el ORM  facilitaría  esta migración). En el caso  en que aún no sea performante se pueden indexar las tablas  necesarias (p. ej. la tabla de asignaciones de trabajadores a proyectos) con esto el sistema debería funcionar bien.
-
-    2. ¿Qué cambiarías si múltiples usuarios lo usaran al mismo tiempo?
-    - Hay que definir qué significa usarlo al mismo tiempo, si lo que se quiere es  interactividad  (p. ej  ver que está editando  un usuario , como  en google docs) se posrían usar websockets  para una solucion de este tipo. 
-    -Si lo que se quiere es asegurar la integridad  de una  operacion compleja se puede usar  transacciones en sql.
-    - Si lo que se quiere es diminuir la carga  en el servidor se pueden deployar varias instancias  de este y mediante un load balancer distribuirlas (con nginx  por ejemplo).
-    3. ¿Cómo agregarías permisos por rol?
-    Se debe  primero idear una forma de autenticación  por usuario esto puede ser mediante JWT o Session tokens, una vez un usuario es identificado se le puede asignar un rol (p. ej. admin, user) y en base a eso definir qué acciones puede realizar (que  endpoints  puede ejecutar).
-    Express es una librería para construir apis, no tiene una solución de autenticación integrada, pero se pueden usar middlewares como `passport` para implementar esta funcionalidad.Se puede optar por frameworks  más  completos  como Nest  para tener esto  de antemano.
-    No necesitas implementarlo, solo explicarlo.
-
+  Responde brevemente:
+  1. ¿Cómo escalarías este sistema si tuviera 10.000 proyectos?
+  Una motor de  bases de datos relacional  debería ser suficiente para esa cantidad de datos. Lo que se tendría que hacer es  migrar el sistema a Postgres (el ORM  facilitaría  esta migración). En el caso  en que aún no sea performante se pueden indexar las tablas  necesarias (p. ej. la tabla de asignaciones de trabajadores a proyectos) con esto el sistema debería funcionar bien.
+  2. ¿Qué cambiarías si múltiples usuarios lo usaran al mismo tiempo?
+   Hay que definir qué significa usarlo al mismo tiempo
+  - si lo que se quiere es  interactividad  (p. ej  ver que está editando  un usuario , como  en google docs) se posrían usar websockets  para una solucion de este tipo. 
+   - Si lo que se quiere es asegurar la integridad  de una  operacion compleja se puede usar  transacciones en sql.
+   
+   - Si lo que se quiere es diminuir la carga  en el servidor se pueden deployar varias instancias  de este y mediante un load balancer distribuirlas (con nginx  por ejemplo).
+  3. ¿Cómo agregarías permisos por rol?
+  Se debe  primero idear una forma de autenticación  por usuario esto puede ser mediante JWT o Session tokens, una vez un usuario es identificado se le puede asignar un rol (p. ej. admin, user) y en base a eso definir qué acciones puede realizar (que  endpoints  puede ejecutar).
+  Express es una librería para construir apis, no tiene una solución de autenticación integrada, pero se pueden usar middlewares como `passport` para implementar esta funcionalidad.Se puede optar por frameworks  más  completos  como Nest  para tener esto  de antemano.
+  No necesitas implementarlo, solo explicarlo.
 
