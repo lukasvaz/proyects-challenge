@@ -3,7 +3,7 @@ import { Project, Worker } from "../models/models";
 
 const router = express.Router();
 
-// Create a new project
+
 router.post("/projects", async (req, res) => {
   const { name, client, initDate, endDate } = req.body;
   if (!name || !client) return res.status(400).json({ error: "name and client are required" });
@@ -24,7 +24,7 @@ router.post("/projects", async (req, res) => {
 
 // Create a new worker (optionally assign to a project via projectId)
 router.post("/workers", async (req, res) => {
-  const { name, role, seniority, projectId } = req.body;
+  const { name, role, seniority} = req.body;
   if (!name || !role) return res.status(400).json({ error: "name and role are required" });
 
   try {
@@ -33,12 +33,6 @@ router.post("/workers", async (req, res) => {
       role,
       seniority: seniority || "junior",
     });
-
-    if (projectId) {
-      const project = await Project.findByPk(projectId as any);
-      if (!project) return res.status(404).json({ error: "project not found to assign" });
-      await (project as any).addWorker(worker); // association mixin
-    }
 
     const workerWithProjects = await Worker.findByPk(worker.get("id") as any, { include: [{ model: Project, as: "projects" }] });
     return res.status(201).json(workerWithProjects);
