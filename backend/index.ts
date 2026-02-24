@@ -7,15 +7,10 @@ const app = express();
 app.use(express.json());
 app.use("/api", router);
 async function start() {
-  try {
     await initDb();
     app.listen(PORT, () => {
       console.log(`Backend listening on http://localhost:${PORT}`);
     });
-  } catch (err) {
-    console.error("Failed to initialize database:", err);
-    process.exit(1);
   }
-}
 
 start();

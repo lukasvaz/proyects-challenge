@@ -13,7 +13,7 @@ export const Project: ModelStatic<Model<ProjectAttributes, ProjectCreationAttrib
   "Project",
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -45,7 +45,7 @@ export const Worker: ModelStatic<Model<WorkerAttributes, WorkerCreationAttribute
   "Worker",
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -63,7 +63,7 @@ export const Worker: ModelStatic<Model<WorkerAttributes, WorkerCreationAttribute
       defaultValue: "junior",
     },
     projectId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       references: { model: "projects", key: "id" },
       onDelete: "SET NULL",
