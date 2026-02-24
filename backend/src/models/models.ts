@@ -36,7 +36,7 @@ export const Project: ModelStatic<Model<ProjectAttributes, ProjectCreationAttrib
   },
   {
     tableName: "projects",
-    timestamps: true,
+    timestamps: false,
   }
 );
 
@@ -61,24 +61,35 @@ export const Worker: ModelStatic<Model<WorkerAttributes, WorkerCreationAttribute
       type: DataTypes.ENUM("junior", "semi-senior", "senior"),
       allowNull: false,
       defaultValue: "junior",
-    },
-    projectId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: { model: "projects", key: "id" },
-      onDelete: "SET NULL",
-      onUpdate: "CASCADE",
-    },
+    }
   },
   {
     tableName: "workers",
-    timestamps: true,
+    timestamps: false,
   }
 );
 
-// Associations
-Project.hasMany(Worker, { as: "workers", foreignKey: "projectId" });
-Worker.belongsTo(Project, { as: "project", foreignKey: "projectId" });
+// Associations (many-to-many via an explicit join table)
+export const ProjectWorker = sequelize.define(
+  "ProjectWorker",
+  {
+    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  },
+  { tableName: "project_workers", timestamps: false }
+);
+
+Project.belongsToMany(Worker, {
+  through: ProjectWorker,
+  as: "workers",
+  foreignKey: "projectId",
+  otherKey: "workerId",
+});
+Worker.belongsToMany(Project, {
+  through: ProjectWorker,
+  as: "projects",
+  foreignKey: "workerId",
+  otherKey: "projectId",
+});
 
 // init connection  helper
 export async function initDb({ force = false } = {}) {
@@ -90,4 +101,5 @@ export default {
   sequelize,
   Project,
   Worker,
+  ProjectWorker,
 };
